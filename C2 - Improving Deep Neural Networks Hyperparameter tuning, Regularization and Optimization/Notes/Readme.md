@@ -168,6 +168,8 @@ Here are the course summary as its given on the course [link](https://www.course
 
   - The new term `(1 - (learning_rate*lambda)/m) * w[l]`  causes the **weight to decay** in proportion to its size.
 
+  - (New) Why normalize by m? As the number of samples increase, this reduce the importance of the regularization term. This is expected because regularization will be less demanding when there is sufficient data, while regularization is at a cost of adding bias.
+
 
 ### Why regularization reduces overfitting?
 
