@@ -200,7 +200,7 @@ def predict(X, y, parameters):
     """
     
     m = X.shape[1]
-    p = np.zeros((1,m), dtype = np.int)
+    p = np.zeros((1,m), dtype = np.int64)
     
     # Forward propagation
     a3, caches = forward_propagation(X, parameters)
@@ -325,12 +325,18 @@ def plot_decision_boundary(model, X, y):
     plt.show()
     
 def load_2D_dataset():
-    data = scipy.io.loadmat('datasets/data.mat')
-    train_X = data['X'].T
-    train_Y = data['y'].T
-    test_X = data['Xval'].T
-    test_Y = data['yval'].T
+    # data = scipy.io.loadmat('datasets/data.mat')
+    
+    # train_X = data['X'].T
+    # train_Y = data['y'].T
+    # test_X = data['Xval'].T
+    # test_Y = data['yval'].T
 
+    with h5py.File('datasets/data.mat', 'r') as f:
+        train_X = f['X'][:].T
+        train_Y = f['y'][:].T
+        test_X = f['Xval'][:].T
+        test_Y = f['yval'][:].T
     plt.scatter(train_X[0, :], train_X[1, :], c=train_Y, s=40, cmap=plt.cm.Spectral);
     
     return train_X, train_Y, test_X, test_Y

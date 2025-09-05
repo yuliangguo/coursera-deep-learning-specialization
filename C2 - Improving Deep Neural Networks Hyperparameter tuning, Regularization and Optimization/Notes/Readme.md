@@ -326,6 +326,7 @@ _**Implementation tip**_: if you implement gradient descent, one of the steps to
     - if it is < 10^-7  - great, very likely the backpropagation implementation is correct
     - if around 10^-5   - can be OK, but need to inspect if there are no particularly big values in `d_theta_approx - d_theta` vector
     - if it is >= 10^-3 - bad, probably there is a bug in backpropagation implementation
+  - (New comment) The main reasons of slowness is due to full iteration through each parameter to perturb, and approx the gradient to each parameter, which requires to run forward function num_parameter times. 
 
 ### Gradient checking implementation notes
 
@@ -534,6 +535,8 @@ Implications of L2-regularization on:
    `W = W - learning_rate * dW / (sqrt(sdW) + epsilon)`
 - With RMSprop you can increase your learning rate.
 - Developed by Geoffrey Hinton and firstly introduced on [Coursera.org](https://www.coursera.org/) course.
+- (Comment) Not sure the figure explain the intuition well. RMSprop divide the gradient by a running average of	its	recent magnitude. This makes the step in each dimension more equal.
+- (Comment) If some direction's gradient magnitude being large for some time, it will explore less in that direction, and vice-versa. Just think of each dimension independently, the overall direction wil be changed depending on relative length between.
 
 ### Adam optimization algorithm
 
